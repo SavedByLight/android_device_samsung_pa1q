@@ -1,4 +1,4 @@
-# TWRP device tree for Samsung Galaxy S25 (pa1q)
+# TWRP device tree for Samsung Galaxy S25  (pa1q)
 
 Official released on July 20 2025 
 
@@ -28,7 +28,7 @@ Official released on July 20 2025
 | GPU                          | Adreno 830                                                                    |
 | Memory                       | 12 GB RAM (LPDDR5X)                                                           |
 | Shipped OS                   | Android 15 (One UI 7.0)                                                       |
-| Storage                      | 128/256/512 GB (UFS 3.1/4.1)                                                  |
+| Storage                      | 128/256/512 GB (UFS 3.1/4.0)                                                  |
 | SIM                          | dual Nano-SIM, eSIM                                                           |
 | MicroSD                      | No                                                                            |
 | Battery                      | 4000mAh Li-ion (non-removable), 25W fast charge                               |
@@ -74,7 +74,7 @@ Minor checks
 - [✔] battery level
 - [✔] temperature
 - [✔] encrypted backups
-- [✔] input devices via USB (USB-OTG) - keyboard and mouse
+- [✖] input devices via USB (USB-OTG) - keyboard and mouse
 - [✔] USB mass storage export
 - [✔] set brightness
 - [✖] vibrate
@@ -89,7 +89,7 @@ repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aos
 ```
 ## Sync manifest twrp-12.1
 ```bash
-repo sync
+repo sync -j$(nproc --all)
 ```
 ## Cloning the device tree
 ```bash
