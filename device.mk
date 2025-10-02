@@ -33,6 +33,12 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \
     fastbootd
 
+# Keystore2
+PRODUCT_PACKAGES += \
+    android.system.keystore2 \
+    keystore2-service \
+    libkeystore2_client
+
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 

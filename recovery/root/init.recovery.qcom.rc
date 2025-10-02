@@ -61,11 +61,22 @@ on fs
     # Start vendor partition monitoring early for faster boot
     exec - root root -- /system/bin/vendor_check.sh 
    
+on post-fs
+    start boot-hal-1-2
+
+    mkdir /mnt/vendor/efs/DAK 0775 root root
+    restorecon --recursive --force /mnt/vendor/efs/DAK
+    chown root root /mnt/vendor/efs/DAK/gakkeybox
+    chmod 0644 /mnt/vendor/efs/DAK/gakkeybox
+
+on boot
+    start health-hal-2-1
     
+on post-fs-data
+    mkdir /data/vendor/keymaster 0775 root root
+
 # Set vendor monitoring properties
     setprop vendor.twrp.vendor_check_complete true
-
-
 
 # Vendor partition check service
 service vendor-check /system/bin/vendor_check.sh
@@ -82,8 +93,19 @@ service vendor-health /system/bin/vendor_health.sh
     group root
     oneshot
     disabled
+    
+service keystore2 /system/bin/keystore2 /data/misc/keystore /tmp/misc/keystore
+    class early_hal
+    user keystore
+    group keystore readproc log
+    interface aidl android.system.keystore2.IKeystoreService
+    seclabel u:r:recovery:s0
 
-
+service vendor.keymint-default /system/bin/android.hardware.security.keymint-service
+    class early_hal
+    user root
+    group root drmrpc
+    seclabel u:r:recovery:s0
 
 on property:vendor.twrp.monitoring=true
     start vendor-check
@@ -93,17 +115,6 @@ on property:vendor.twrp.monitoring=true
 on property:vendor.twrp.manual_check=true
     exec - root root -- /system/bin/vendor_check.sh &
     exec - root root -- /system/bin/vendor_health.sh &
-
-
-
-on post-fs
-    start boot-hal-1-2
-    
-
-
-on boot
-    start health-hal-2-1
-    
 
    
 
