@@ -64,7 +64,7 @@ on post-fs
     start boot-hal-1-2
 
     mkdir /mnt/vendor/efs/DAK 0775 root root
-    restorecon --recursive --force /mnt/vendor/efs/DAK
+    restorecon --recursive /mnt/vendor/efs/DAK
     chown root root /mnt/vendor/efs/DAK/gakkeybox
     chmod 0644 /mnt/vendor/efs/DAK/gakkeybox
 
