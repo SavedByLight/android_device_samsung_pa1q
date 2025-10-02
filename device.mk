@@ -39,6 +39,11 @@ PRODUCT_PACKAGES += \
     keystore2-service \
     libkeystore2_client
 
+# QCOM
+PRODUCT_PACKAGES += \
+    qcom_decrypt \
+    qcom_decrypt_fbe
+
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 

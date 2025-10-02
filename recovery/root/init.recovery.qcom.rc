@@ -24,17 +24,16 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-
-on init
-    # to cut charging battery path
-    write /sys/class/power_supply/battery/siop_level 0
+import /init.recovery.qcom_decrypt.rc
 	
 on init
+    write /sys/class/power_supply/battery/siop_level 0
     write /sys/class/backlight/panel0-backlight/brightness 200
     setprop sys.usb.configfs 1
     setprop ro.twrp.vendor_boot true
     setprop ro.twrp.fastbootd 1
     setprop ro.boot.fastbootd false
+    setprop prepdecrypt.setpatch true
 
 on property:ro.boot.usbcontroller=*
     setprop sys.usb.controller ${ro.boot.usbcontroller}
