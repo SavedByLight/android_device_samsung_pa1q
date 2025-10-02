@@ -67,12 +67,13 @@ on post-fs
     restorecon --recursive /mnt/vendor/efs/DAK
     chown root root /mnt/vendor/efs/DAK/gakkeybox
     chmod 0644 /mnt/vendor/efs/DAK/gakkeybox
-
-on boot
-    start health-hal-2-1
     
 on post-fs-data
     mkdir /data/vendor/keymaster 0775 root root
+
+    on boot
+    start health-hal-2-1
+    start vendor.keymint-default
 
 # Set vendor monitoring properties
     setprop vendor.twrp.vendor_check_complete true
