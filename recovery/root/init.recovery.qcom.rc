@@ -94,17 +94,11 @@ service vendor-health /system/bin/vendor_health.sh
     oneshot
     disabled
     
-service keystore2 /system/bin/keystore2 /data/misc/keystore /tmp/misc/keystore
-    class early_hal
-    user keystore
-    group keystore readproc log
-    interface aidl android.system.keystore2.IKeystoreService
-    seclabel u:r:recovery:s0
-
 service vendor.keymint-default /system/bin/android.hardware.security.keymint-service
     class early_hal
     user root
     group root drmrpc
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     seclabel u:r:recovery:s0
 
 on property:vendor.twrp.monitoring=true
