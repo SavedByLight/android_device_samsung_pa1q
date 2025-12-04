@@ -17,6 +17,12 @@ AB_OTA_PARTITIONS += \
     odm \
     vendor_boot
 
+# API levels
+PRODUCT_SHIPPING_API_LEVEL := 35
+
+# VNDK
+PRODUCT_TARGET_VNDK_VERSION := 35
+
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
